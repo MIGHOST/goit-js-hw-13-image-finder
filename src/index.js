@@ -1,3 +1,3 @@
 import './styles.css';
-// import moduleObj from "../src/templates/swapi-table-row.hbs";
+import imgItems from "../src/templates/pictures.hbs";
 import "./js/news";

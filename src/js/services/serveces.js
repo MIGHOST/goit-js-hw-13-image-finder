@@ -1,5 +1,5 @@
 
-const baseUrl = "https://newsapi.org/v2/everything";
+const baseUrl = "https://pixabay.com/api/?key=15289703-43002e1369874935da9758818";
 
 
 export default{ 
@@ -11,25 +11,10 @@ fetchArticle(){
             Authorization:"045783fcfda7444d92c28c4011f33205",
         },
     };
-    const requestParams = `?q=${this.query}&page=${this.page}&pageSize=3`;
-    return fetch(baseUrl + requestParams, options)
+    const requestParams = `&q=${this.query}&page=${this.page}&pageSize=3`;
+    return fetch(baseUrl + requestParams,)
     .then(response => response.json())
-    .then(parseResponse=> {
-        this.incrementPage();
-        return parseResponse.articles;
-    });
+    .then(parse => parse.hits)
+   
   
-},
-get searchQuery(){
-    return this.query
-}, 
-set searchQuery(string){
-    this.query = string
-},
-incrementPage(){
-    this.page +=1;
-},
-resetPage(){
-    this.page = 1;
-}
-};
+},};
