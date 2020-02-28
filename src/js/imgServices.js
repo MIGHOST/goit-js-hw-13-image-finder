@@ -31,7 +31,7 @@ class Form {
   `
   }
   makeBtn() {
-    return `<button type="button" class = "js-btn none-visible" data-action="load-more">Load more</button>`
+    return `<button type="button" class = "js-btn none-visible load-btn" data-action="load-more">Load more</button>`
   }
 
   start(container) {
@@ -73,7 +73,7 @@ class Form {
       .then(data => {
         this.build(data);
         window.scrollTo({
-          top: 100,
+          top: this.btn.offsetTop,
           behavior: 'smooth'});
       })
       .catch(error => {
