@@ -8,7 +8,7 @@ page:1,
 perPage: 12,
 query: "",  
 fetchArticle(){
-    const requestParams = `&q=${this.query}&page=${this.page}&pageSize=12&key=${keyAPI}`;
+    const requestParams = `&q=${this.query}&page=${this.page}&per_page=${this.perPage}&key=${keyAPI}`;
     const a = baseUrl + requestParams
     return fetch(a)    
     .then(response => response.json())

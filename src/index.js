@@ -5,4 +5,4 @@ import "./js/imgServices";
 import Form from "./js/imgServices.js";
 const bodyDOM = document.querySelector("body");
 const searchForm = new Form();
-searchForm.start(bodyDOM);  
+searchForm.start(bodyDOM); 
