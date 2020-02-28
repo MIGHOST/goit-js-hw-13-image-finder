@@ -9,7 +9,7 @@ class Form {
     this.articleList = null;
     this.searchInput = null;
     this.itemsImg = null;
-    this.loadMoreBtn = null
+    this.btn = null
   }
 
 
@@ -41,6 +41,9 @@ class Form {
     this.searchInput = document.querySelector(".js-search-input");
     this.articleList = document.querySelector(".js-gallery__item");        
     this.searchForm.addEventListener("submit", this.searchImg.bind(this));
+    setTimeout(this.renderBtn(), 2000);    
+    this.btn = document.querySelector(".js-btn");
+    this.btn.addEventListener("click", this.loadMoreBtnHandler.bind(this));
  
 
 
@@ -59,9 +62,7 @@ class Form {
     newsService.searchQuery = input.value;
     this.fetchArticles();
     input.value = '';
-    this.renderBtn();
-    this.btn = document.querySelector(".js-btn");
-    this.btn.addEventListener("click", this.loadMoreBtnHandler.bind(this));
+
 
     
 
