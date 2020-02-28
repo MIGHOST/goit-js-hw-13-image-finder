@@ -31,3 +31,4 @@ resetPage() {
   this.page = 1;
 },
 };
+

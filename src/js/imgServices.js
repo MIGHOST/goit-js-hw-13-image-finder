@@ -31,15 +31,15 @@ class Form {
   `
   }
   makeBtn() {
-    return `<button type="button" class = "js-btn" data-action="load-more">Load more</button>`
+    return `<button type="button" class = "js-btn none-visible" data-action="load-more">Load more</button>`
   }
 
   start(container) {
     this.addToScreen(container, "beforeend", this.makeSearchForm());
-    this.addToScreen(container, "beforeend", this.makeImgList());
+    this.addToScreen(container, "beforeend", this.makeImgList());    
     this.searchForm = document.querySelector("#search-form");
     this.searchInput = document.querySelector(".js-search-input");
-    this.articleList = document.querySelector(".js-gallery__item");    
+    this.articleList = document.querySelector(".js-gallery__item");        
     this.searchForm.addEventListener("submit", this.searchImg.bind(this));
  
 
@@ -58,14 +58,12 @@ class Form {
     newsService.resetPage();
     newsService.searchQuery = input.value;
     this.fetchArticles();
-    this.renderBtn()
-    this.btn = document.querySelector(".js-btn")
-    this.btn.addEventListener("click", this.loadMoreBtnHandler.bind(this))
-            window.scrollTo({
-              top: this.btn.offsetTop,
-              behavior: 'smooth',
-            });
     input.value = '';
+    this.renderBtn();
+    this.btn = document.querySelector(".js-btn");
+    this.btn.addEventListener("click", this.loadMoreBtnHandler.bind(this));
+
+    
 
 
   }
@@ -74,6 +72,9 @@ class Form {
     newsService.fetchArticle()
       .then(data => {
         this.build(data);
+        window.scrollTo({
+          top: 100,
+          behavior: 'smooth'});
       })
       .catch(error => {
         console.warn(error);
@@ -81,13 +82,20 @@ class Form {
   }
 
   build(items) {
+
+    if (
+      !this.articleList.children.length &&
+      this.btn.classList.contains('none-visible')
+    ) {
+      this.btn.classList.remove('none-visible');
+    }
     const markup = items.reduce((acc, el) => picturesTemplate(el) + acc, "");
 
-    this.articleList.insertAdjacentHTML("afterbegin", markup)
+    this.articleList.insertAdjacentHTML("beforeend", markup)
   }
   renderBtn() {
-    const list = document.querySelector(".gallery");
-    this.addToScreen(list, "beforeend", this.makeBtn())
+    const body = document.querySelector("body");   
+    body.insertAdjacentHTML("beforeend", this.makeBtn())
   }
 
   clearListItems() {
