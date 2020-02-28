@@ -57,11 +57,14 @@ class Form {
     this.clearListItems();
     newsService.resetPage();
     newsService.searchQuery = input.value;
-  
     this.fetchArticles();
     this.renderBtn()
     this.btn = document.querySelector(".js-btn")
-    this.btn.addEventListener("click", this.loadMoreBtnHandler())
+    this.btn.addEventListener("click", this.loadMoreBtnHandler.bind(this))
+            window.scrollTo({
+              top: this.btn.offsetTop,
+              behavior: 'smooth',
+            });
     input.value = '';
 
 
